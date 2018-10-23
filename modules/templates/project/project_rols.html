@@ -1,0 +1,70 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+<div>
+	<ul>
+    	<li>{{ data_.name }}</li>
+		<li>{{ data_.percent }} %</li>
+		<li>{{ data_.file }}</li>
+		<li>{{ data_.created_at }}</li>
+		<li>{{ data_.client_id }}</li>
+	</ul>
+</div>
+
+<table border="10">
+{% for i in data %}
+
+	<tr>
+		<td>{{ i.rol }}</td>
+		<td>{{ i.user_id }}</td>
+		<td>{{ i.project_id }}</td>
+		<td>
+			<a href="{% url 'view_rol' i.id %}">View</a>
+		</td>
+
+{% for r in rol_ %}
+
+	{% if user == r.user_id %}
+		
+		{% if r.rol == 'Scrum Master' %}
+
+			{% if r.project_id == data_ %}
+				<td>
+					<a href="{% url 'update_rol' i.id %}">Edit</a>
+				</td>
+				<td>
+					<a href="{% url 'delete_rol' i.id %}">Delete</a>
+				</td>
+			{% endif %}
+
+		{% endif %}
+
+	{% endif %}
+
+{% endfor %}
+
+	</tr>
+
+{% endfor %}
+</table>
+
+{% for r in rol_ %}
+
+	{% if user == r.user_id %}
+		
+		{% if r.rol == 'Scrum Master' %}
+
+			{% if r.project_id == data_ %}
+
+				<a href="{% url 'create_rol' %}">New rol</a>
+
+			{% endif %}
+
+		{% endif %}
+
+	{% endif %}
+
+{% endfor %}
+
+{% endblock %}

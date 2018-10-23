@@ -1,0 +1,18 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+<div>
+	<ul>
+    	<li>{{ data.rol }}</li>
+		<li>{{ data.user_id }} </li>
+		<li>{{ data.project_id }}</li>
+	</ul>
+</div>
+
+{% comment %}
+<a href="{% url 'update_rol' data.id %}">Edit</a>
+<a href="{% url 'delete_rol' data.id %}">Delete</a>
+{% endcomment %}
+
+{% endblock %}

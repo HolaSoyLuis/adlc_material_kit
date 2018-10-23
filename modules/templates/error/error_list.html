@@ -1,0 +1,29 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+<table border="10">
+{% for i in data %}
+
+	<tr>
+		<td>{{ i.title }}</td>
+		<td>{{ i.description }}</td>
+		<td>{{ i.state }}</td>
+		<td>{{ i.task_id }}</td>
+		<td>
+			<a href="{% url 'view_error' i.id %}">View</a>
+		</td>
+		<td>
+			<a href="{% url 'update_error' i.id %}">Edit</a>
+		</td>
+		<td>
+			<a href="{% url 'delete_error' i.id %}">Delete</a>
+		</td>
+	</tr>
+
+{% endfor %}
+</table>
+
+<a href="{% url 'create_error' %}">New error</a>
+
+{% endblock %}
