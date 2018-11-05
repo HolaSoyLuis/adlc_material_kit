@@ -10,11 +10,29 @@ from django.views.generic import FormView
 
 from django.views.generic import CreateView
 
+from django.views.generic import TemplateView
+
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def index(request):
     return render(request, 'index.html')
+
+
+class view_buscar_cliente(TemplateView):
+    def post(self, request, *args, **kwargs):
+        buscar = request.POST['buscalo']
+        proyectos = project.objects.filter(name__contains=buscar)
+      
+        if proyectos :
+            return render(request, 'buscar.html',
+            {'proyectos':proyectos , 'proyecto':True})
+        else:
+            clientes = client.objects.filter(name__contains=buscar)
+            print(clientes)
+            return render(request, 'buscar.html',
+             {'clientes':clientes , 'cliente':True})
+   
 
 # client
 @login_required

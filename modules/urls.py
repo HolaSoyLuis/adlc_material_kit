@@ -10,9 +10,13 @@ from .views import list_rol, create_rol, update_rol, delete_rol, view_rol
 
 from .views import LoginView, CrearUsuarioView, log_out
 
+from .views import view_buscar_cliente
+
 urlpatterns = [
     path('', index, name = 'index'),
     path('index', index, name = 'index'),
+
+    path('buscar_cliente', view_buscar_cliente.as_view(), name = 'buscar_cliente'),
 
     path('list_client', list_client, name = 'list_client'),
     path('create_client', create_client, name = 'create_client'),
