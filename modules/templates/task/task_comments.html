@@ -1,20 +1,50 @@
-{% extends 'index.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
+<h1>Task: {{ data_.title }}</h1>
+<table class="table">
+<thead>
+        <tr>
 
-<div>
-	<ul>
-		<li>{{ data_.title }}</li>
-    	<li>{{ data_.percent }} % </li>
-		<li>{{ data_.state }}</li>
-		<li>{{ data_.hours }}</li>
-		<li>{{ data_.project_id }}</li>
-		<li>{{ data_.user_in_charge }}</li>
-		<li>{{ data_.user_supervisor }}</li>
-	</ul>
-</div>
+            <th>Title</th>
+            <th>Percent</th>
+            <th>State</th>
+            <th>Hours</th>
+            <th>Project</th>
+            <th>User in Charge</th>
+            <th>Supervisor</th>
+            <th class="text-right">Actions</th>
+        </tr>
+    </thead>
+<tbody>
+	<tr>
+		<td>{{ data_.title }}</td>
+		<td>{{ data_.percent }}</td>
+		<td>{{ data_.state }}</td>
+		<td>{{ data_.hours }}</td>
+		<td>{{ data_.project_id }}</td>
+		<td>{{ data_.user_in_charge }}</td>
+		<td>{{ data_.user_supervisor }}</td>
+</tr>
+</tbody>
+</table>
 
-<table border="10">
+<br>
+<br>
+<br>
+
+<h1>Task comments: </h1>
+
+<table class="table">
+
+<thead>
+        <tr>
+
+            <th>Title</th>
+            <th>Comment</th>
+            <th>Task</th>
+
+
 {% for i in data %}
 
 	<tr>
@@ -22,21 +52,21 @@
 		<td>{{ i.comment }}</td>
 		<td>{{ i.task_id }}</td>
 		<td>
-			<a href="{% url 'view_comment' i.id %}">View</a>
-		</td>
-		{% comment %}
-		<td>
-			<a href="{% url 'update_comment' i.id %}">Edit</a>
-		</td>
-		<td>
-			<a href="{% url 'delete_comment' i.id %}">Delete</a>
-		</td>
-		{% endcomment %}
-	</tr>
+			<td class="td-actions text-right">
+                <a href="{% url 'view_comment' i.id %}" rel="tooltip" title="View Comment" class="btn btn-info btn-simple btn-xs">
+                    <i class="fa fa-user"></i>
+                </a>
+                <a href="{% url 'update_comment' i.id %}" rel="tooltip" title="Edit Comment" class="btn btn-success btn-simple btn-xs">
+                    <i class="fa fa-edit"></i>
+                </a>
+                <a href="{% url 'delete_comment' i.id %}" rel="tooltip" title="Remove Comment" class="btn btn-danger btn-simple btn-xs">
+                    <i class="fa fa-times"></i>
+                </a>
+            </td>
 
 {% endfor %}
 </table>
 
-<a href="{% url 'create_comment' %}">New comment</a>
+<a href="{% url 'create_comment' %}" class="btn btn-primary btn-raised " >New comment</a>
 
 {% endblock %}

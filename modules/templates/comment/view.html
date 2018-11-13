@@ -1,16 +1,32 @@
-{% extends 'index.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
 
-<div>
-	<ul>
-    	<li>{{ data.title }}</li>
-		<li>{{ data.comment }} </li>
-		<li>{{ data.task_id }}</li>
-	</ul>
-</div>
 
-<a href="{% url 'update_comment' data.id %}">Edit</a>
-<a href="{% url 'delete_comment' data.id %}">Delete</a>
 
+<table class="table">
+	<thead>
+		<tr>
+			<th>Title</th>
+			<th>Comment</th>
+			<th>Task</th>
+			<th>Action</th>
+		</tr>
+	</thead>
+ <tbody>
+    <tr>
+		<td>{{ data.title }}</td>
+		<td>{{ data.comment }}</td>
+		<td>{{ data.task_id }}</td>
+		<td>
+			<a href="{% url 'update_comment' data.id %}" rel="tooltip" title="Edit " class="btn btn-success btn-simple btn-xs">
+		    <i class="fa fa-edit"></i>
+		  </a>
+		  <a href="{% url 'delete_comment' data.id %}" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+		    <i class="fa fa-times"></i>
+		  </a>
+		</td>
+	</tr>
+ </tbody>
+</table>
 {% endblock %}

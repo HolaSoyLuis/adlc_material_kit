@@ -1,18 +1,49 @@
-{% extends 'index.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
+<h1>Project: {{data_.name}} </h1>
+<table class="table">
 
-<div>
-	<ul>
-    	<li>{{ data_.name }}</li>
-		<li>{{ data_.percent }} %</li>
-		<li>{{ data_.file }}</li>
-		<li>{{ data_.created_at }}</li>
-		<li>{{ data_.client_id }}</li>
-	</ul>
-</div>
+	<thead>
+		<tr>
+            <th>Name</th>
+            <th>Percent</th>
+            <th>File</th>
+            <th>Created</th>
+            <th>Client<th>
 
-<table border="10">
+		</tr>
+	</thead>
+<tbody>
+	<tr>
+    	<td>{{ data_.name }}</td>
+		<td>{{ data_.percent }} %</td>
+		<td>{{ data_.file }}</td>
+		<td>{{ data_.created_at }}</td>
+		<td>{{ data_.client_id }}</td>
+	</tr>
+</tbody>
+</table>
+
+
+<br>
+<br>
+<br>
+
+<h1>Project rols: </h1>
+
+<table class="table">
+	<thead>
+
+		<tr>
+			<th>rol</th>
+			<th>User</th>
+			<th>Project</th>
+
+            <th class="text-right">Actions</th>
+
+		</tr>
+	</thead>
 {% for i in data %}
 
 	<tr>
@@ -20,22 +51,27 @@
 		<td>{{ i.user_id }}</td>
 		<td>{{ i.project_id }}</td>
 		<td>
-			<a href="{% url 'view_rol' i.id %}">View</a>
+			{% comment %}
+			 <a href="{% url 'view_rol' i.id %}" rael="tooltip" title="View" class="btn btn-info btn-simple btn-xs">
+				 <i class="fa fa-user"></i>
+			{% endcomment %}
 		</td>
 
 {% for r in rol_ %}
 
 	{% if user == r.user_id %}
-		
+
 		{% if r.rol == 'Scrum Master' %}
 
 			{% if r.project_id == data_ %}
-				<td>
-					<a href="{% url 'update_rol' i.id %}">Edit</a>
-				</td>
-				<td>
-					<a href="{% url 'delete_rol' i.id %}">Delete</a>
-				</td>
+					<td>
+					 <a href="{% url 'update_rol' i.id %}" rael="tooltip" title="Update" class="btn btn-succes btn-simple btn-xs">
+                    <i class="fa fa-user"></i>
+					</td>
+					<td>
+						 <a href="{% url 'delete_rol' i.id %}" rael="tooltip" title="Detele" class="btn btn-danger btn-simple btn-xs">
+						 	  <i class="fa fa-user"></i>
+					</td>
 			{% endif %}
 
 		{% endif %}
@@ -52,12 +88,12 @@
 {% for r in rol_ %}
 
 	{% if user == r.user_id %}
-		
+
 		{% if r.rol == 'Scrum Master' %}
 
 			{% if r.project_id == data_ %}
 
-				<a href="{% url 'create_rol' %}">New rol</a>
+				<a href="{% url 'create_rol' %}" class="btn btn-primary btn-raised ">New rol</a>
 
 			{% endif %}
 

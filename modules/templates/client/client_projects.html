@@ -1,41 +1,70 @@
-{% extends 'index.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
 
-<div>
-	<ul>
-    	<li>{{ data_.name }}</li>
-		<li>{{ data_.telephone }} </li>
-		<li>{{ data_.email }}</li>
-		<li>{{ data_.address }}</li>
-	</ul>
-</div>
+<h1>Client</h1>
+<table class="table">
+  <thead>
 
-<table border="10">
-{% for i in data %}
+ 
+    <tr>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Address</th>
+    </tr>
 
+  
+<tbody>
+  <tr>
+    <td>{{ data_.name }}</td>
+    <td>{{ data_.telephone }} </td>
+    <td><a href="mailto:{{ data_.email }}">{{ data_.email }}</a></td>
+    <td>{{ data_.address }}</td>
+</tr>
+ </tbody>
+</thead>
+ 
+</table>
+
+
+<h1>Projects: </h1>
+<table class="table">
+   <thead>
+    <tr>
+    
+            <th>Name</th>
+            <th>Percent</th>
+            <th>Archive</th>
+            <th>Created</th>
+            <th>Client</th>
+            <th class="text-right">Actions</th>
+    </tr>
+
+</thead>
+  {% for i in data %}
+  <thead>
 	<tr>
 		<td>{{ i.name }}</td>
 		<td>{{ i.percent }}</td>
-		<td>{{ i.file }}</td>
+		<td><a href="{{ i.file }}">{{ i.file }}</a></td>
 		<td>{{ i.created_at }}</td>
 		<td>{{ i.client_id }}</td>
-		<td>
-			<a href="{% url 'view_project' i.id %}">View</a>
-		</td>
-		<td>
-			<a href="{% url 'update_project' i.id %}">Edit</a>
-		</td>
-		{% comment %}
-		<td>
-			<a href="{% url 'delete_project' i.id %}">Delete</a>
-		</td>
-		{% endcomment %}
-	</tr>
+		<td class="td-actions text-right">
+                <a href="{% url 'view_project' i.id %}" rael="tooltip" title="View Project" class="btn btn-info btn-simple btn-xs">
+                    <i class="fa fa-user"></i>
+                </a>
+                <a href="{% url 'update_project' i.id %}" rel="tooltip" title="Edit Project" class="btn btn-success btn-simple btn-xs">
+                    <i class="fa fa-edit"></i>
+                </a>
+                <a href="{% url 'delete_project' i.id %}" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+                    <i class="fa fa-times"></i>
+                </a>
+            </td>
 
 {% endfor %}
 </table>
 
-<a href="{% url 'create_project' %}">New project</a>
+<a href="{% url 'create_project' %}" class="btn btn-primary btn-raised ">New project</a>
 
 {% endblock %}

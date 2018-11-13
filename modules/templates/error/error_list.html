@@ -1,8 +1,18 @@
-{% extends 'index.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
 
-<table border="10">
+<table class="table">
+	 <thead>
+        <tr>
+            <th class="text-center">#</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>State</th>
+            <th>Task</th>
+            <th class="text-right">Actions</th>
+        </tr>
+    </thead>
 {% for i in data %}
 
 	<tr>
@@ -10,20 +20,23 @@
 		<td>{{ i.description }}</td>
 		<td>{{ i.state }}</td>
 		<td>{{ i.task_id }}</td>
-		<td>
-			<a href="{% url 'view_error' i.id %}">View</a>
-		</td>
-		<td>
-			<a href="{% url 'update_error' i.id %}">Edit</a>
-		</td>
-		<td>
-			<a href="{% url 'delete_error' i.id %}">Delete</a>
-		</td>
+		<td class="td-actions text-right">
+                <a href="{% url 'view_error' i.id %}" rael="tooltip" title="View  " clss="btn btn-info btn-simple btn-xs">
+                    <i class="fa fa-user"></i>
+                </a>
+                <a href="{% url 'update_error' i.id %}" rel="tooltip" title="Edit  " class="btn btn-success btn-simple btn-xs">
+                    <i class="fa fa-edit"></i>
+                </a>
+                <a href="{% url 'delete_error' i.id %}" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+                    <i class="fa fa-times"></i>
+                </a>
+            </td>
+
 	</tr>
 
 {% endfor %}
 </table>
 
-<a href="{% url 'create_error' %}">New error</a>
+<a href="{% url 'create_error' %}" class="btn btn-primary btn-raised ">New error</a>
 
 {% endblock %}

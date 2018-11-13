@@ -23,7 +23,7 @@ class view_buscar_cliente(TemplateView):
     def post(self, request, *args, **kwargs):
         buscar = request.POST['buscalo']
         proyectos = project.objects.filter(name__contains=buscar)
-      
+
         if proyectos :
             return render(request, 'buscar.html',
             {'proyectos':proyectos , 'proyecto':True})
@@ -32,7 +32,7 @@ class view_buscar_cliente(TemplateView):
             print(clientes)
             return render(request, 'buscar.html',
              {'clientes':clientes , 'cliente':True})
-   
+
 
 # client
 @login_required

@@ -1,20 +1,50 @@
-{% extends 'index.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
+<h1>Project: {{data_.name}} </h1>
+<table class="table">
 
-<div>
-	<ul>
-    	<li>{{ data_.name }}</li>
-		<li>{{ data_.percent }} %</li>
-		<li>{{ data_.file }}</li>
-		<li>{{ data_.created_at }}</li>
-		<li>{{ data_.client_id }}</li>
-	</ul>
-</div>
+	<thead>
+		<tr>
+            <th>Project Name</th>
+            <th>Percent</th>
+            <th>File</th>
+            <th>Created</th>
+            <th>Client<th>
 
-<table border="10">
+		</tr>
+	</thead>
+<tbody>
+	<tr>
+    	<td>{{ data_.name }}</td>
+		<td>{{ data_.percent }} %</td>
+		<td><a href="{{ data_.file }}">{{ data_.file }}</a></td>
+		<td>{{ data_.created_at }}</td>
+		<td>{{ data_.client_id }}</td>
+	</tr>
+</tbody>
+</table>
+
+<br>
+<br>
+<br>
+
+<h1>Project tasks: </h1>
+
+<table class="table">
+	<thead>
+		<tr>
+            <th>Percent</th>
+            <th>State</th>
+            <th>Hours</th>
+            <th>Project</th>
+            <th>User in Charge<th>
+            <th>Supervisor</th>
+
+		</tr>
+
 {% for i in data %}
-
+<tbody>
 	<tr>
 		<td>{{ i.percent }}</td>
 		<td>{{ i.state }}</td>
@@ -23,22 +53,25 @@
 		<td>{{ i.user_in_charge }}</td>
 		<td>{{ i.user_supervisor }}</td>
 		<td>
-			<a href="{% url 'view_task' i.id %}">View</a>
+			 <a href="{% url 'view_task' i.id %}" rael="tooltip" title="View" class="btn btn-info btn-simple btn-xs">
+                    <i class="fa fa-user"></i>
 		</td>
 
 {% for r in rol_ %}
 
 	{% if user == r.user_id %}
-		
+
 		{% if r.rol == 'Scrum Master' %}
 
 			{% if r.project_id == data_ %}
 				<td>
-					<a href="{% url 'update_task' i.id %}">Edit</a>
-				</td>
+					 <a href="{% url 'update_task' i.id %}" rael="tooltip" title="Update" class="btn btn-succes btn-simple btn-xs">
+                    <i class="fa fa-user"></i>
+					</td>
 				<td>
-					<a href="{% url 'delete_task' i.id %}">Delete</a>
-				</td>
+					 <a href="{% url 'delete_task' i.id %}" rael="tooltip" title="Delete" class="btn btn-danger btn-simple btn-xs">
+                    <i class="fa fa-user"></i>
+					</td>
 			{% endif %}
 
 		{% endif %}
@@ -48,6 +81,7 @@
 {% endfor %}
 
 	</tr>
+	</tbody>
 
 {% endfor %}
 </table>
@@ -55,11 +89,11 @@
 {% for r in rol_ %}
 
 	{% if user == r.user_id %}
-		
+
 		{% if r.rol == 'Scrum Master' %}
 
 			{% if r.project_id == data_ %}
-				<a href="{% url 'create_task' %}">New task</a>
+				<a href="{% url 'create_task' %}" class="btn btn-info btn-simple btn-xs">New task</a>
 			{% endif %}
 
 		{% endif %}

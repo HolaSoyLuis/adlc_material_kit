@@ -1,9 +1,27 @@
-{% extends 'index.html' %}
+{% extends 'base.html' %}
 
-{% block content %}
-<form method="POST">
+{% block content %} 
+<center>
+<div class="row">
+  <div  class="col-lg-7 col-md-6 ml-auto mr-auto">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">New Requeriment</h4>
+      </div>
+      <div class="card-body">
+        
+        <form method="POST" class=>
 	{% csrf_token %}
+	<center>
+<div class="bmd-label-floating">
 	{{ form.as_p }}
-	<input type="submit" name="Save" value="Save">
-</form>
+</div>
+	<input type="submit" name="Save" value="Save" class="btn btn-primary btn-raised">
+</center>
+	</form>
+      </div>
+    </div>
+  </div>
+  </center>
+
 {% endblock %}

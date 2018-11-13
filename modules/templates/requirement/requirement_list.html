@@ -1,8 +1,20 @@
-{% extends 'index.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
 
 <table border="10">
+
+
+	<thead>
+        <tr>
+            <th class="text-center">#</th>
+            <th>Title</th>
+            <th>Date Start</th>
+            <th>Date End</th>
+            <th>Project</th>
+            <th class="text-right">Actions</th>
+        </tr>
+    </thead>
 {% for i in data %}
 
 	<tr>
@@ -10,20 +22,22 @@
 		<td>{{ i.start_date }}</td>
 		<td>{{ i.end_date }}</td>
 		<td>{{ i.project_id }}</td>
-		<td>
-			<a href="{% url 'view_requirement' i.id %}">View</a>
-		</td>
-		<td>
-			<a href="{% url 'update_requirement' i.id %}">Edit</a>
-		</td>
-		<td>
-			<a href="{% url 'delete_requirement' i.id %}">Delete</a>
-		</td>
-	</tr>
+		<td class="td-actions text-right">
+                <a href="{% url 'view_requirement' i.id %}" rel="tooltip" title="View Project" class="btn btn-info btn-simple btn-xs">
+                    <i class="fa fa-user"></i>
+                </a>
+                <a href="{% url 'update_requirement' i.id %}" rel="tooltip" title="Edit Project" class="btn btn-success btn-simple btn-xs">
+                    <i class="fa fa-edit"></i>
+                </a>
+                <a href="{% url 'delete_requirement' i.id %}" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+                    <i class="fa fa-times"></i>
+                </a>
+            </td>
+		
 
 {% endfor %}
 </table>
 
-<a href="{% url 'create_requirement' %}">New requirement</a>
+<a href="{% url 'create_requirement' %}" class="btn btn-pr">New requirement</a>
 
 {% endblock %}

@@ -1,20 +1,31 @@
-{% extends 'index.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
 
-<div>
-	<ul>
-		<li>{{ data.title }} </li>
-		<li>{{ data.percent }} %</li>
-		<li>{{ data.state }}</li>
-		<li>{{ data.hours }}</li>
-		<li>{{ data.project_id }}</li>
-		<li>{{ data.user_in_charge }}</li>
-		<li>{{ data.user_supervisor }}</li>
-	</ul>
-</div>
+<h1>Task: {{ data.title }}</h1>
 
-<a href="{% url 'task_comments' data.id %}">Task comments</a>
-<a href="{% url 'task_errors' data.id %}">Task errors</a>
+<table class="table">
+	<thead>
+		<th>Title</th>
+		<th>Percent</th>
+		<th>State</th>
+		<th>Hours</th>
+		<th>Project</th>
+		<th>User in charge</th>
+		<th>Supervisor</th>
+	</thead>
+	<tr>
+		<td>{{ data.title }} </td>
+		<td>{{ data.percent }} %</td>
+		<td>{{ data.state }}</td>
+		<td>{{ data.hours }}</td>
+		<td>{{ data.project_id }}</td>
+		<td>{{ data.user_in_charge }}</td>
+		<td>{{ data.user_supervisor }}</td>
+	</tr>
+</table>
+
+<a href="{% url 'task_comments' data.id %}" class="btn btn-primary btn-round">Task comments</a>
+<a href="{% url 'task_errors' data.id %}" class="btn btn-primary btn-round">Task errors</a>
 
 {% endblock %}

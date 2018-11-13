@@ -1,31 +1,94 @@
-{% extends 'index.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
 
-<div>
-	<ul>
-    	<li>{{ data.name }}</li>
-		<li>{{ data.percent }} %</li>
-		<li><a href="{{ data.file }}">{{ data.file }}</a></li>
-		<li>{{ data.created_at }}</li>
-		<li>{{ data.client_id }}</li>
-	</ul>
-</div>
 
-{% comment %}
-<a href="{% url 'create_requirement' %}">New requirement</a>
-<a href="{% url 'create_task' %}">New task</a>
-<a href="{% url 'create_rol' %}">New rol</a>
-{% endcomment %}
+<h1>Panel Project: {{data.name}} </h1>
+<table class="table">
+	<thead>
 
-<a href="{% url 'project_rols' data.id %}">Project rols</a>
-<a href="{% url 'project_tasks' data.id %}">Project tasks</a>
-<a href="{% url 'project_requirements' data.id %}">Project requirements</a>
+		<tr>
+			<th>Name</th>
+			<th>Percent</th>
+			<th>File</th>
+			<th>Date Created</th>
+			<th>Client</th>
+		</tr>
+	</thead>
+	<tbody>
+	<tr>
+
+		<td>{{ data.name }}</td>
+		<td>{{ data.percent }}</td>
+		<td><a href="{{ data.file }}">{{ data.file }}</a></td>
+		<td>{{ data.created_at }}</td>
+		<td>{{ data.client_id }}</td>
+	</tr>
+</tbody>
+</table>
+
+</table>
 
 <br>
+<br>
+<br>
+<br>
 
-<a href="{% url 'list_task_not_started' data.id %}">Project tasks not started</a>
-<a href="{% url 'list_task_in_process' data.id %}">Project tasks in process</a>
-<a href="{% url 'list_task_finished' data.id %}">Project tasks finished</a>
+		<nav class="navbar navbar-expand-lg bg-primary">
+            <div class="container">
+              <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+								<button type="button" class="btn btn-info">Option: </button>
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                  <li class="nav-item active">
+                    <a href="{% url 'create_requirement' %}" class="btn btn-primary btn-raised ">New requirement</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{% url 'create_task' %}" class="btn btn-primary btn-raised ">New task</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{% url 'create_rol' %}" class="btn btn-primary btn-raised ">New rol</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+
+		<nav class="navbar navbar-expand-lg bg-primary">
+            <div class="container">
+              <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                <button type="button" class="btn btn-info">View: </button>
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                  <li class="nav-item active">
+                    <a href="{% url 'project_rols' data.id %}" class="btn btn-primary btn-raised ">Project rols</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{% url 'project_tasks' data.id %}" class="btn btn-primary btn-raised ">Project tasks</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{% url 'project_requirements' data.id %}" class="btn btn-primary btn-raised ">Project requirements</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+
+          <nav class="navbar navbar-expand-lg bg-primary">
+            <div class="container">
+              <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                <button type="button" class="btn btn-info">States: </button>
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                  <li class="nav-item active">
+                    <a href="{% url 'list_task_not_started' data.id %}" class="btn btn-primary btn-raised ">Project tasks not started</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{% url 'list_task_in_process' data.id %}" class="btn btn-primary btn-raised ">Project tasks in process</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{% url 'list_task_finished' data.id %}" class="btn btn-primary btn-raised ">Project tasks finished</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
 
 {% endblock %}

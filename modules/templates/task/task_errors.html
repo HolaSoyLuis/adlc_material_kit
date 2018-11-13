@@ -1,20 +1,46 @@
-{% extends 'index.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
 
-<div>
-	<ul>
-		<li>{{ data_.title }}</li>
-    	<li>{{ data_.percent }} % </li>
-		<li>{{ data_.state }}</li>
-		<li>{{ data_.hours }}</li>
-		<li>{{ data_.project_id }}</li>
-		<li>{{ data_.user_in_charge }}</li>
-		<li>{{ data_.user_supervisor }}</li>
-	</ul>
-</div>
+<table class="table">
+<thead>
+        <tr>
 
-<table border="10">
+            <th>Title</th>
+            <th>Percent</th>
+            <th>State</th>
+            <th>Hours</th>
+            <th>Project</th>
+            <th>User in Charge</th>
+            <th>Supervisor</th>
+             
+        </tr>
+    </thead>
+{% for data in data %}
+<tbody>
+	<tr>
+		<td>{{ data.title }}</td>
+		<td>{{ data.percent }}</td>
+		<td>{{ data.state }}</td>
+		<td>{{ data.hours }}</td>
+		<td>{{ data.project_id }}</td>
+		<td>{{ data.user_in_charge }}</td>
+		<td>{{ data.user_supervisor }}</td>
+</tr>
+</tbody>
+</table>
+
+<table class="table">
+
+	<thead>
+		<tr>
+			<th>title</th>
+            <th>description</th>
+            <th>state</th>
+            <th>task</th>
+            <th class="text-right">Actions</th>
+		</tr>
+	</thead>
 {% for i in data %}
 
 	<tr>
@@ -23,21 +49,22 @@
 		<td>{{ i.state }}</td>
 		<td>{{ i.task_id }}</td>
 		<td>
-			<a href="{% url 'view_error' i.id %}">View</a>
-		</td>
-		{% comment %}
-		<td>
-			<a href="{% url 'update_error' i.id %}">Edit</a>
-		</td>
-		<td>
-			<a href="{% url 'delete_error' i.id %}">Delete</a>
-		</td>
-		{% endcomment %}
-	</tr>
+
+			<td class="td-actions text-right">
+                <a href="{% url 'view_error' i.id %}" rel="tooltip" title="View Task" class="btn btn-info btn-simple btn-xs">
+                    <i class="fa fa-user"></i>
+                </a>
+                <a href="{% url 'update_error' i.id %}" rel="tooltip" title="Edit Task" class="btn btn-success btn-simple btn-xs">
+                    <i class="fa fa-edit"></i>
+                </a>
+                <a href="{% url 'delete_error' i.id %}" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+                    <i class="fa fa-times"></i>
+                </a>
+            </td>
 
 {% endfor %}
 </table>
 
-<a href="{% url 'create_error' %}">New error</a>
+<a href="{% url 'create_error' %}" class="btn btn-primary btn-raised ">New error</a>
 
 {% endblock %}

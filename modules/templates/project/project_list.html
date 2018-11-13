@@ -1,32 +1,46 @@
-{% extends 'index.html' %}
+{% extends 'base.html' %}
+
+
 
 {% block content %}
 
-<table border="10">
+<table class="table">
+	<thead>
+        <tr>
+            <th class="text-center">#</th>
+            <th>Name</th>
+            <th>Percent</th>
+            <th>File</th>
+            <th>Created</th>
+            <th>Client</th>
+            <th class="text-right">Actions</th>
+        </tr>
+    </thead>
 {% for i in data %}
-
+<tbody>
 	<tr>
+		<td class="text-center">{{ i.id }}</td>
 		<td>{{ i.name }}</td>
 		<td>{{ i.percent }}</td>
-		<td>{{ i.file }}</td>
+		<td><a href="{{ i.file }}">{{ i.file }}</a></td>
 		<td>{{ i.created_at }}</td>
 		<td>{{ i.client_id }}</td>
-		<td>
-			<a href="{% url 'view_project' i.id %}">View</a>
-		</td>
-		<td>
-			<a href="{% url 'update_project' i.id %}">Edit</a>
-		</td>
-		{% comment %}
-		<td>
-			<a href="{% url 'delete_project' i.id %}">Delete</a>
-		</td>
-		{% endcomment %}
+		<td class="td-actions text-right">
+                <a href="{% url 'view_project' i.id %}" rel="tooltip" title="View Project" class="btn btn-info btn-simple btn-xs">
+                    <i class="fa fa-user"></i>
+                </a>
+                <a href="{% url 'update_project' i.id %}" rel="tooltip" title="Edit Project" class="btn btn-success btn-simple btn-xs">
+                    <i class="fa fa-edit"></i>
+                </a>
+                <a href="{% url 'delete_project' i.id %}" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+                    <i class="fa fa-times"></i>
+                </a>
+            </td>
 	</tr>
-
+</tbody>
 {% endfor %}
 </table>
-
-<a href="{% url 'create_project' %}">New project</a>
+<a href="{% url 'create_project' %}" class="btn btn-primary btn-raised ">New Project</a>
 
 {% endblock %}
+

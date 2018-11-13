@@ -1,31 +1,47 @@
-{% extends 'index.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
 
-<table border="10">
-{% for i in data %}
+<table class="table">
+	
+    <thead>
+        <tr>
+            <th class="text-center">#</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th class="text-right">Actions</th>
+        </tr>
+    </thead>
+    {% for i in data %}
+    <tbody>
+        <tr>
+            <td class="text-center">{{ i.id }}</td>
+            <td>{{ i.name }}</td>
+            <td>{{ i.telephone }}</td>
+            <td><a href="mailto:{{ i.email }}">{{ i.email }}</a></td>
+            <td>{{ i.address }}</td>
+            <td class="td-actions text-right">
+                <a href="{% url 'view_client' i.id %}" rael="tooltip" title="View Profile" class="btn btn-info btn-simple btn-xs">
+                    <i class="fa fa-user"></i>
+                </a>
+                <a href="{% url 'update_client' i.id %}" rel="tooltip" title="Edit Profile" class="btn btn-success btn-simple btn-xs">
+                    <i class="fa fa-edit"></i>
+                </a>
+                <a href="{% url 'delete_client' i.id %}" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+                    <i class="fa fa-times"></i>
+                </a>
+            </td>
+        </tr>
 
-	<tr>
-		<td>{{ i.name }}</td>
-		<td>{{ i.telephone }}</td>
-    	<td>{{ i.email }}</td>
-		<td>{{ i.address }}</td>
-		<td>
-			<a href="{% url 'view_client' i.id %}">View</a>
-		</td>
-		<td>
-			<a href="{% url 'update_client' i.id %}">Edit</a>
-		</td>
-		{% comment %}
-		<td>
-			<a href="{% url 'delete_client' i.id %}">Delete</a>
-		</td>
-		{% endcomment %}
-	</tr>
-
-{% endfor %}
+    </tbody>
+    {% endfor %}
 </table>
 
-<a href="{% url 'create_client' %}">register new client</a>
-
+<a href="{% url 'create_client' %}" class="btn btn-primary btn-raised ">Register new client</a>
 {% endblock %}
+
+
+
+

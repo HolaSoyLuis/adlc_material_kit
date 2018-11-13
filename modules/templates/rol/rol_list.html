@@ -1,28 +1,41 @@
-{% extends 'index.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
 
-<table border="10">
-{% for i in data %}
 
+<table class="table">
+
+	<thead>
+        <tr>
+            <th class="text-center">#</th>
+            <th>Rol</th>
+            <th>User</th>
+            <th>Project</th>
+            <th class="text-right">Actions</th>
+        </tr>
+    </thead>
+{% for i in data %}
+	<tbody>
 	<tr>
 		<td>{{ i.rol }}</td>
 		<td>{{ i.user_id }}</td>
-    <td>{{ i.project_id }}</td>
-		<td>
-			<a href="{% url 'view_rol' i.id %}">View</a>
-		</td>
-		<td>
-			<a href="{% url 'update_rol' i.id %}">Edit</a>
-		</td>
-		<td>
-			<a href="{% url 'delete_rol' i.id %}">Delete</a>
-		</td>
+    	<td>{{ i.project_id }}</td>
+		<td class="td-actions text-right">
+                <a href="{% url 'view_client' i.id %}" rel="tooltip" title="View Profile" class="btn btn-info btn-simple btn-xs">
+                    <i class="fa fa-user"></i>
+                </a>
+                <a href="{% url 'update_client' i.id %}" rel="tooltip" title="Edit Profile" class="btn btn-success btn-simple btn-xs">
+                    <i class="fa fa-edit"></i>
+                </a>
+                <a href="{% url 'delete_client' i.id %}" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+                    <i class="fa fa-times"></i>
+                </a>
+            </td>
 	</tr>
+	</tbody>
 
 {% endfor %}
 </table>
-
-<a href="{% url 'create_rol' %}">New rol</a>
+<a href="{% url 'create_rol' %}" class="btn btn-primary btn-raised ">New Rol</a>
 
 {% endblock %}

@@ -1,18 +1,47 @@
-{% extends 'index.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
+<h1>Project: {{data_.name}} </h1>
+<table class="table">
 
-<div>
-	<ul>
-    	<li>{{ data_.name }}</li>
-		<li>{{ data_.percent }} %</li>
-		<li>{{ data_.file }}</li>
-		<li>{{ data_.created_at }}</li>
-		<li>{{ data_.client_id }}</li>
-	</ul>
-</div>
+	<thead>
+		<tr>
+            <th>Name</th>
+            <th>Percent</th>
+            <th>File</th>
+            <th>Created</th>
+            <th>Client<th>
 
-<table border="10">
+		</tr>
+	</thead>
+<tbody>
+	<tr>
+    	<td>{{ data_.name }}</td>
+		<td>{{ data_.percent }} %</td>
+		<td>{{ data_.file }}</td>
+		<td>{{ data_.created_at }}</td>
+		<td>{{ data_.client_id }}</td>
+	</tr>
+</tbody>
+</table>
+
+<br>
+<br>
+<br>
+
+<h1>Project requirements: </h1>
+
+<table class="table">
+
+	<thead>
+		<tr>
+			<th>Title</th>
+			<th>Start Date</th>
+			<th>Date end</th>
+			<th>Project</th>
+			<th>Action</th>
+		</tr>
+	</thead>
 {% for i in data %}
 
 	<tr>
@@ -21,22 +50,22 @@
 		<td>{{ i.end_date }}</td>
 		<td>{{ i.project_id }}</td>
 		<td>
-			<a href="{% url 'view_requirement' i.id %}">View</a>
-		</td>
+			 <a href="{% url 'view_requirement' i.id %}" rael="tooltip" title="View" class="btn btn-info btn-simple btn-xs">
+				 <i class="fa fa-user"></i>
 
 {% for r in rol_ %}
 
 	{% if user == r.user_id %}
-		
+
 		{% if r.rol == 'Scrum Master' %}
 
 			{% if r.project_id == data_ %}
-			<td>
-				<a href="{% url 'update_requirement' i.id %}">Edit</a>
-			</td>
-			<td>
-				<a href="{% url 'delete_requirement' i.id %}">Delete</a>
-			</td>
+					 <a href="{% url 'update_requirement' i.id %}" rael="tooltip" title="Update" class="btn btn-success btn-simple btn-xs">
+						 <i class="fa fa-user"></i>
+
+						 <a href="{% url 'delete_requirement' i.id %}" rael="tooltip" title="Detele" class="btn btn-danger btn-simple btn-xs">
+							 <i class="fa fa-user"></i>
+
 			{% endif %}
 
 		{% endif %}
@@ -44,7 +73,7 @@
 	{% endif %}
 
 {% endfor %}
-
+		</td>
 	</tr>
 
 {% endfor %}
@@ -53,11 +82,11 @@
 {% for r in rol_ %}
 
 	{% if user == r.user_id %}
-		
+
 		{% if r.rol == 'Scrum Master' %}
 
 			{% if r.project_id == data_ %}
-				<a href="{% url 'create_requirement' %}">New requirement</a>
+				<a href="{% url 'create_requirement' %}" class="btn btn-primary btn-raised ">New requirement</a>
 			{% endif %}
 
 		{% endif %}

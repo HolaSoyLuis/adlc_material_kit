@@ -1,18 +1,36 @@
-{% extends 'index.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
 
-<div>
-	<ul>
-    	<li>{{ data.rol }}</li>
-		<li>{{ data.user_id }} </li>
-		<li>{{ data.project_id }}</li>
-	</ul>
-</div>
+
+<table class="table">
+	<thead>
+		
+		<tr>
+			<th>Rol</th>
+			<th>User</th>
+			<th>Project</th>
+			
+	</thead>
+<tbody>
+	<tr>
+		<td>{{ data.rol }}</td>
+		<td>{{ data.user_id }}</td>
+    	<td>{{ data.project_id }}</td>
+	</tr>
+</tbody>
+
+	</table>
+
 
 {% comment %}
-<a href="{% url 'update_rol' data.id %}">Edit</a>
-<a href="{% url 'delete_rol' data.id %}">Delete</a>
+ <a href="{% url 'update_rol' data.id %}" rel="tooltip" title="Edit Client" class="btn btn-success btn-simple btn-xs">
+                    <i class="fa fa-edit"></i>
+                </a>
+                <a href="{% url 'delete_rol' data.id %}" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+                    <i class="fa fa-times"></i>
+                </a>
 {% endcomment %}
+
 
 {% endblock %}

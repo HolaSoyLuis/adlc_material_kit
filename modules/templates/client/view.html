@@ -1,19 +1,40 @@
-{% extends 'index.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
+<table class="table">
+	<thead>
+		<tr>
+		 
+			<th>Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Address</th>
+		</tr>
 
-<div>
-	<ul>
-    	<li>{{ data.name }}</li>
-		<li>{{ data.telephone }} </li>
-		<li>{{ data.email }}</li>
-		<li>{{ data.address }}</li>
-	</ul>
-</div>
+	</thead>
+ 
+
+ <tbody>
+ 	<tr>
+ 		<td>{{ data.name }}</td>
+ 		<td>{{ data.telephone }} </td>
+ 		<td><a href="mailto:{{ data.email }}">{{ data.email }}</a></td>
+ 		<td>{{ data.address }}</td>
+
 {% comment %}
-<a href="{% url 'update_client' data.id %}">Edit</a>
-<a href="{% url 'delete_client' data.id %}">Delete</a>
+ <a href="{% url 'update_client' data.id %}" rel="tooltip" title="Edit Client" class="btn btn-success btn-simple btn-xs">
+                    <i class="fa fa-edit"></i>
+                </a>
+                <a href="{% url 'delete_client' data.id %}" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+                    <i class="fa fa-times"></i>
+                </a>
 {% endcomment %}
-<a href="{% url 'client_projects' data.id %}">View client projects</a>
 
+
+</tbody>
+</tr>
+</table>
+<a href="{% url 'list_client' %}" class="btn btn-primary btn-raised">Return</a>
+<a href="{% url 'client_projects' data.id %}" class="btn btn-info btn-simple btn-xs">View client projects</a>
+ 
 {% endblock %}

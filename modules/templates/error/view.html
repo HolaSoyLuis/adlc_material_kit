@@ -1,17 +1,36 @@
-{% extends 'index.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
+<table class="table">
 
-<div>
-	<ul>
-    	<li>{{ data.title }}</li>
-		<li>{{ data.description }}</li>
-		<li>{{ data.state }}</li>
-		<li>{{ data.task_id }}</li>
-	</ul>
-</div>
+	<thead>
+		
+		<tr>
+			<th>Title</th>
+			<th>Description</th>
+			<th>State</th>
+			<th>Task</th>
+		</tr>
+	</thead>
 
-<a href="{% url 'update_error' data.id %}">Edit</a>
-<a href="{% url 'delete_error' data.id %}">Delete</a>
+<tbody>
+	<tr>
+    	<td>{{ data.title }}</td>
+		<td>{{ data.description }}</td>
+		<td>{{ data.state }}</td>
+		<td>{{ data.task_id }}</td>
+	</tr>
+	<a href="{% url 'update_error' data.id %}" rel="tooltip" title="Edit Client" class="btn btn-success btn-simple btn-xs">
+                    <i class="fa fa-edit"></i>
+                </a>
+                <a href="{% url 'delete_error' data.id %}" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+                    <i class="fa fa-times"></i>
+                </a>
+	</tbody>
 
+ 
+
+
+
+</table>
 {% endblock %}
